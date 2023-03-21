@@ -1,9 +1,6 @@
-import pymongo
-import pandas
+class demo():
+    def __init__(self) -> None:
+        name : str
 
-d = {
-    '0' : {'name' : 'varad', 'age' : 21},
-    '1' : {'name' : 'yadnu' , 'age' : 15}
-}
-
-print(list(d.values()))
+if __name__ == '__main__' :
+    c1 = demo()

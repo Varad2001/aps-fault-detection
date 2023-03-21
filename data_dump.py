@@ -5,7 +5,7 @@ import pandas as pd
 import json
 
 DATA_FILE_PATH = "/home/varad/Work/Data_science/aps_fault_detection/aps_failure_training_set1.csv"
-DB_NAME = "APS"
+DB_NAME = "APS" 
 CLUSTER_NAME = "SENSOR_DATA"
 
 

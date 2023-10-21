@@ -7,8 +7,11 @@ class DataIngestionArtifact :
         train_file_path : str = train_path
         test_file_path : str = test_path
 
+
 class DataValidationArtifact :
-    pass
+
+    def __init__(self, report_file_path) :
+       report_file_path : str = report_file_path
 
 class DataTransformationArtifact :
     pass

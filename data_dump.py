@@ -1,10 +1,12 @@
 # Dump the aps_training data to mongodb
 
+import os
 import pymongo
 import pandas as pd
 import json
 
-DATA_FILE_PATH = "/home/varad/Work/Data_science/aps_fault_detection/aps_failure_training_set1.csv"
+
+DATA_FILE_PATH = os.path.join(os.getcwd(), "aps_failure_training_set1.csv")
 DB_NAME = "APS" 
 CLUSTER_NAME = "SENSOR_DATA"
 

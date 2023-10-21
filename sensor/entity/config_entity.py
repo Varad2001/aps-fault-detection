@@ -16,6 +16,7 @@ class TrainingPipelineConfig():
         except Exception as e:
             raise SensorException(e, sys)
 
+
 class DataIngestionConfig :
 
     def __init__(self, training_pipeline_config : TrainingPipelineConfig) :
@@ -36,7 +37,10 @@ class DataIngestionConfig :
 
 
 class DataValidationConfig :
-    pass
+    def __init__(self, training_pipeline_config: TrainingPipelineConfig):
+        self.data_validation_dir = os.path.join(training_pipeline_config.artifact_dir,"data_validation")
+        self.report_file_path = os.path.join(self.data_validation_dir, "report.yaml")
+        
 
 class DataTransformationConfig :
     pass

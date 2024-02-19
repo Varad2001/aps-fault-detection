@@ -1,5 +1,6 @@
 import pandas as pd
 import os, sys
+import yaml
 from sensor.logger import logging
 from sensor.exception import SensorException
 from sensor.config import mongo_client
@@ -29,4 +30,29 @@ def get_dataframe_from_collection(db_name : str, collection_name : str) -> pd.Da
         return df
     except Exception as e:
         raise SensorException(e, sys)
+
+
+
+def write_yaml_file(file_path:str, data:dict) ->  None:
+    """Write the data to a yaml file.
+
+    Args:
+        file_path (str): file path
+        data (dict) : Data to be written
+
+    Returns :
+        None.
+
+
+    """
+    try:
+        f_path = os.path.dirname(file_path)
+        os.makedirs(f_path, exist_ok=True)
+
+        with open(f_path, "w") as f:
+            yaml.dump(data, f)
+
+    except Exception as e:
+        raise SensorException(e, sys)
+
 

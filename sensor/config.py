@@ -1,15 +1,14 @@
 import pymongo
 import os
 from dataclasses import dataclass
-from dotenv import load_dotenv
 
 @dataclass
 class EnvironmentVariables : 
-    load_dotenv()
-    mongodb_url : str = os.getenv("MONGODB_URL")
+    mongodb_url : str = "mongodb+srv://varadkhonde:yadneshkhonde@cluster0.zeesz.mongodb.net/?retryWrites=true&w=majority"
 
 
 env_var = EnvironmentVariables()
+
 mongo_client = pymongo.MongoClient(env_var.mongodb_url)
 
 

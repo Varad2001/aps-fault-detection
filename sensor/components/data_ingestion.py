@@ -24,6 +24,9 @@ class data_ingestion() :
     def initiate_data_ingestion(self) -> DataIngestionArtifact :
         
         try :
+
+            logging.info(f"{'>>'*10}Initiating data ingestion phase...")
+
             # get the data as a dataframe
             df : pd.DataFrame = get_dataframe_from_collection(
                 self.data_ingestion_config.database_name,
@@ -52,6 +55,8 @@ class data_ingestion() :
                 self.data_ingestion_config.feature_store_file_path,
                 self.data_ingestion_config.train_file_path,
                 self.data_ingestion_config.test_file_path)
+            
+            logging.info(f"{'>>'*10}Data ingestion complete.")
             
             return data_ingestion_artifact
         

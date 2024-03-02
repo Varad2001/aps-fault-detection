@@ -49,8 +49,9 @@ def write_yaml_file(file_path:str, data:dict) ->  None:
         f_path = os.path.dirname(file_path)
         os.makedirs(f_path, exist_ok=True)
 
-        with open(f_path, "w") as f:
+        with open(file_path, "w") as f:
             yaml.dump(data, f)
+
 
     except Exception as e:
         raise SensorException(e, sys)

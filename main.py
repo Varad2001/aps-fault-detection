@@ -1,9 +1,8 @@
+import sys
 from sensor import logger
 from sensor.exception import SensorException
-import sys
-from sensor.utils import get_dataframe_from_collection
 from sensor.entity import config_entity, artifact_entity
-from sensor.components import data_ingestion, data_validation
+from sensor.components import data_ingestion, data_validation, data_transformation
 
 if __name__ == '__main__':
     db_name = "APS"
@@ -12,14 +11,27 @@ if __name__ == '__main__':
         training_pipeline_config = config_entity.TrainingPipelineConfig()
         data_ingestion_config = config_entity.DataIngestionConfig(training_pipeline_config)
         
-        data_ingestion_phase = data_ingestion.data_ingestion(data_ingestion_config)
+        data_ingestion_phase = data_ingestion.DataIngestion(data_ingestion_config)
         data_ingestion_artifact = data_ingestion_phase.initiate_data_ingestion()
+        
 
         data_validation_config = config_entity.DataValidationConfig(training_pipeline_config)
-        data_validation_phase = data_validation.data_validation(data_validation_config=data_validation_config,
+        data_validation_phase = data_validation.DataValidation(data_validation_config=data_validation_config,
                                                                 data_ingestion_artifact=data_ingestion_artifact)
 
         data_validation_artifact = data_validation_phase.initiate_data_validation()
+
+        data_transformation_config = config_entity.DataTransformationConfig(
+            training_pipeline_config=training_pipeline_config
+        )
+        data_transformation_phase = data_transformation.DataTransformation(
+            data_transformation_config=data_transformation_config,
+            data_ingestion_artifact=data_ingestion_artifact
+        )
+
+        data_transformation_artifact = data_transformation_phase.initiate_data_transformation()
+
+        print(data_transformation_artifact.__dict__)
 
     except Exception as e:
         print(SensorException(e, sys))

@@ -1,6 +1,9 @@
-import pandas as pd
+
 import os, sys
 import yaml
+import dill
+import pandas as pd
+import numpy as np
 from sensor.logger import logging
 from sensor.exception import SensorException
 from sensor.config import mongo_client
@@ -57,3 +60,39 @@ def write_yaml_file(file_path:str, data:dict) ->  None:
         raise SensorException(e, sys)
 
 
+def save_object(file_path:str, obj:object) -> None:
+    try:
+        logging.info(f"Saving object to path : {file_path}...")
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path, "wb") as file_obj:
+            dill.dump(obj, file_obj)
+        logging.info(f"Object saved successfully.")
+    except Exception as e:
+        raise SensorException(e, sys)
+    
+
+def load_object(file_path:str) -> object:
+    try:
+        with open(file_path, "rb") as file_obj:
+            return dill.load(file_obj)
+    except Exception as e:
+        raise SensorException(e, sys)
+    
+
+def save_numpy_array(file_path:str, array):
+    try:
+        logging.info(f"Saving the array to {file_path}...")
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path, "wb") as obj:
+            np.save(obj, array)
+        logging.info("Saved successfully.")
+    except Exception as e:
+        raise SensorException(e, sys)
+
+
+def load_numpy_array(file_path:str):
+    try:
+        with open(file_path, "rb") as obj:
+            return np.load(obj)
+    except Exception as e:
+        raise SensorException(e, sys)

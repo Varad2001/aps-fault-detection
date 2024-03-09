@@ -14,8 +14,14 @@ class DataValidationArtifact :
     def __init__(self, report_file_path) :
        self.report_file_path : str = report_file_path
 
+
 class DataTransformationArtifact :
-    pass
+    def __init__(self,transformer_object_path, transformed_train_path, 
+                 transformed_test_path, target_encoder_path) :
+        self.transformer_object_path = transformer_object_path
+        self.transformed_train_path = transformed_train_path
+        self.transformed_test_path = transformed_test_path
+        self.target_encoder_path = target_encoder_path
 
 class ModelTrainingArtifact :
     pass

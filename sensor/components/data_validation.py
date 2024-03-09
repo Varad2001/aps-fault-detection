@@ -11,13 +11,16 @@ from sensor.exception import SensorException
 
 
 
-class data_validation :
+class DataValidation :
 
     def __init__(self, data_validation_config:DataValidationConfig, 
                  data_ingestion_artifact:DataIngestionArtifact):
-        self.data_validation_config = data_validation_config
-        self.data_ingestion_artifact = data_ingestion_artifact
-        self.validation_error = dict()
+        try:
+            self.data_validation_config = data_validation_config
+            self.data_ingestion_artifact = data_ingestion_artifact
+            self.validation_error = dict()
+        except Exception as e:
+            raise SensorException(e, sys)
 
 
     def drop_missing_values_columns(self, df:pd.DataFrame, report_key_name) -> pd.DataFrame | None:
@@ -116,6 +119,7 @@ class data_validation :
                 base_data , current_data = base_df[base_col], current_df[base_col]
 
                 # null hypothesis : both data samples are having the same distribution
+                
                 same_distribution = ks_2samp(base_data, current_data)
 
 

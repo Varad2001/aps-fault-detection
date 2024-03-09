@@ -15,7 +15,7 @@ from sensor.entity.config_entity import DataIngestionConfig
 from sensor.utils import get_dataframe_from_collection
 from sklearn.model_selection import train_test_split
 
-class data_ingestion() :
+class DataIngestion() :
 
     def __init__(self, data_ingestion_config : DataIngestionConfig):
 
@@ -27,13 +27,19 @@ class data_ingestion() :
 
             logging.info(f"{'>>'*10}Initiating data ingestion phase...")
 
+            print(f"Data Ingestion using local file to save time, please keep in mind.")
+
             # get the data as a dataframe
+            """
             df : pd.DataFrame = get_dataframe_from_collection(
                 self.data_ingestion_config.database_name,
                 self.data_ingestion_config.collection_name)
+            """
+            df = pd.read_csv(os.path.join(os.getcwd(), "aps_failure_training_set1.csv"))
             
             # replace the "na" values by np.nan
             df.replace(to_replace="nan", value=np.nan, inplace=True)
+            
 
             # store the dataframe to 'feature_store_file_path' folder
             path = self.data_ingestion_config.feature_store_file_path

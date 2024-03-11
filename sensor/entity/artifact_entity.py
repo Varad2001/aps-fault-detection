@@ -23,8 +23,14 @@ class DataTransformationArtifact :
         self.transformed_test_path = transformed_test_path
         self.target_encoder_path = target_encoder_path
 
+
 class ModelTrainingArtifact :
-    pass
+    def __init__(self, model_path, f1_train_score, f1_test_score):
+        self.model_path = model_path
+        self.f1_train_score = f1_train_score
+        self.f1_test_score = f1_test_score
+
+
 
 class ModelEvaluationArtifact :
     pass

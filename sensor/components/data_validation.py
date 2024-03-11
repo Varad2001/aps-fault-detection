@@ -148,7 +148,7 @@ class DataValidation :
 
             # get the required dataframes
             base_df = pd.read_csv(self.data_validation_config.base_file_path)
-            train_df = pd.read_csv(self.data_ingestion_artifact.train_file_path)
+            train_df = pd.read_csv(self.data_ingestion_artifact.train_file_path, low_memory=False)
             test_df = pd.read_csv(self.data_ingestion_artifact.test_file_path)
 
             # dataframes contain null values as "na", --> convert them to np.nan

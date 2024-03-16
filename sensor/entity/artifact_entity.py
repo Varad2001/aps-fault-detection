@@ -33,7 +33,12 @@ class ModelTrainingArtifact :
 
 
 class ModelEvaluationArtifact :
-    pass
+    def __init__(self, is_model_accepted, improved_accuracy):
+        self.is_model_accepted = is_model_accepted
+        self.improved_accuracy = improved_accuracy
+        
 
 class ModelPusherArtifact :
-    pass
+    def __init__(self, model_pusher_saved_models_dir, model_pusher_sync_dir):
+        self.model_pusher_saved_models_dir = model_pusher_saved_models_dir
+        self.model_pusher_sync_dir = model_pusher_sync_dir

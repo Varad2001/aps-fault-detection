@@ -91,7 +91,7 @@ class DataTransformation():
             
             logging.info(f"Performing resampling...")
             
-            smt = SMOTETomek(sampling_strategy="minority")
+            smt = SMOTETomek(sampling_strategy="minority", random_state=42)
 
             logging.info(f"Before resampling in training data:\
                          Input features:{input_feature_train_arr.shape},Target feature:{target_feature_train_arr.shape}")

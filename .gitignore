@@ -4,3 +4,5 @@ artifacts
 **/__pycache__/
 test.ipynb
 .vscode
+.gitignore
+saved_models/

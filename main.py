@@ -2,7 +2,7 @@ import sys
 from sensor import logger
 from sensor.exception import SensorException
 from sensor.entity import config_entity, artifact_entity
-from sensor.components import data_ingestion, data_validation, data_transformation, model_trainer
+from sensor.components import data_ingestion, data_validation, data_transformation, model_trainer, model_evaluation, model_pusher
 
 if __name__ == '__main__':
     db_name = "APS"
@@ -39,7 +39,28 @@ if __name__ == '__main__':
 
         model_training_artifact = model_training_phase.initiate_model_training()
 
-        print(model_training_artifact.__dict__)
+        model_eva_config = config_entity.ModelEvaluationConfig(training_pipeline_config)
+        model_eva_phase = model_evaluation.ModelEvaluation(
+            model_eval_config=model_eva_config,
+            data_ingestion_artifact=data_ingestion_artifact,
+            data_transformation_artifact=data_transformation_artifact,
+            model_training_artifact=model_training_artifact
+        )
+        model_eva_artifact = model_eva_phase.initiate_model_evaluation()
+
+        model_pusher_config = config_entity.ModelPusherConfig(training_pipeline_config)
+        model_pusher_phase = model_pusher.ModelPusher(
+            model_pusher_config=model_pusher_config,
+            data_transformation_artifact=data_transformation_artifact,
+            model_trainer_artifact=model_training_artifact,
+            model_eva_artifact=model_eva_artifact
+        )
+
+        model_pusher_artifact = model_pusher_phase.initiate_model_pusher()
+
+        print(model_pusher_artifact.__dict__)
+
+        
 
     except Exception as e:
         print(SensorException(e, sys))

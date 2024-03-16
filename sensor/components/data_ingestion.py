@@ -48,7 +48,7 @@ class DataIngestion() :
             df.to_csv(path_or_buf=path, header=True, index=False)
 
             # split the data to train and test
-            train_df, test_df = train_test_split(df,test_size=self.data_ingestion_config.test_size)
+            train_df, test_df = train_test_split(df,test_size=self.data_ingestion_config.test_size, random_state=42)
 
             # save the files
             dataset_dir = os.path.dirname(self.data_ingestion_config.train_file_path)

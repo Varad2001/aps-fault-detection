@@ -6,3 +6,4 @@ test.ipynb
 .vscode
 .gitignore
 saved_models/
+prediction/

@@ -18,3 +18,5 @@ The project aims to build a complete end-to-end machine learning pipeline to per
 - Mainly contains 6 steps mentioned above. 
     - config entity : input to each stage
     - artifact entity : output of a stage
+- Tech stack :
+    - Scikit-learn, Numpy, Pandas, MongoDB, Airflow, etc.
